@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Opáčko webového serveru</title>
+    <script>
+        function vynulujCitac() {
+            fetch("http://localhost:8080/citac/vynuluj").then(function(response) {
+                response.text().then(function(text) {
+                    let obj = JSON.parse(text);
+                    document.getElementById("vystup").innerHTML = "Citac ma hodnotu: " + obj.citac;
+                });
+            });
+        }
+        function zpracujCitac() {
+            fetch("http://localhost:8080/citac").then(function(response) {
+                response.text().then(function(text) {
+                    let obj = JSON.parse(text);
+                    document.getElementById("vystup").innerHTML = "Citac ma hodnotu: " + obj.citac;
+                });
+            });
+        }
+        function poNacteni() {
+            setInterval(zpracujCitac, 1000);
+        }
+    </script>
+</head>
+<body onload="poNacteni()">
+
+<h1>Opáčko webového serveru</h1>
+
+<div id="vystup">...</div>
+<input type="button" value="Reset" onclick="vynulujCitac()">
+
+</body>
+</html>
