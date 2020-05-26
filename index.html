@@ -21,8 +21,24 @@
                 });
             });
         }
+        function zapamatujSiMe() {
+            let jm = document.getElementById("jmeno").value;
+            fetch(HOST+"/zapamatujsime?jmeno="+jm).then(function(response) {
+                response.text().then(function(text) {
+                });
+            });
+        }
+        function kohoSiPamatujes() {
+            fetch(HOST+"/kohosipamatujes").then(function(response) {
+                response.text().then(function(text) {
+                    let obj = JSON.parse(text);
+                    document.getElementById("vystup2").innerHTML = obj.zapamatovanejmeno;
+                });
+            });
+        }
         function poNacteni() {
             setInterval(zpracujCitac, 1000);
+            setInterval(kohoSiPamatujes, 1000);
         }
     </script>
 </head>
@@ -32,6 +48,14 @@
 
 <div id="vystup">...</div>
 <input type="button" value="Reset" onclick="vynulujCitac()">
+
+<br><br>
+
+<input type="text" id="jmeno">
+<input type="button" value="Zapamatuj si me" onclick="zapamatujSiMe()">
+<div id="vystup2">...</div>
+
+
 
 </body>
 </html>
