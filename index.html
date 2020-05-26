@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Opáčko webového serveru</title>
     <script>
+        const HOST = window.location.protocol + "//" + window.location.hostname + ((window.location.port) ? ":" + window.location.port : "");
         function vynulujCitac() {
-            fetch("http://localhost:8080/citac/vynuluj").then(function(response) {
+            fetch(HOST+"/citac/vynuluj").then(function(response) {
                 response.text().then(function(text) {
                     let obj = JSON.parse(text);
                     document.getElementById("vystup").innerHTML = "Citac ma hodnotu: " + obj.citac;
@@ -13,7 +14,7 @@
             });
         }
         function zpracujCitac() {
-            fetch("http://localhost:8080/citac").then(function(response) {
+            fetch(HOST+"/citac").then(function(response) {
                 response.text().then(function(text) {
                     let obj = JSON.parse(text);
                     document.getElementById("vystup").innerHTML = "Citac ma hodnotu: " + obj.citac;
